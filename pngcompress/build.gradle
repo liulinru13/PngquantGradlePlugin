@@ -1,0 +1,22 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+uploadArchives{
+    repositories{
+        mavenDeployer{
+            repository(url: uri('../repos'))
+        }
+    }
+}
+
+repositories{
+    jcenter()
+}
+
+group = "com.mmrx.pngcompress"
+version = '1.0.0'
+
+dependencies{
+    implementation gradleApi()
+    implementation localGroovy()
+}
