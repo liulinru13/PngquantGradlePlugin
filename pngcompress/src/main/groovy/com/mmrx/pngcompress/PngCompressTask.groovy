@@ -11,21 +11,23 @@ class PngCompressTask extends DefaultTask{
     @TaskAction
     void doPngCompress(){
         PngCompressExt ext = project.extensions.pngCompressExt
-        if(ext.enable){
-            if(ext.resDir != null && ext.resDir.startsWith("file:/")){
+        if(ext.enable) {
+            if (ext.resDir != null && ext.resDir.startsWith("file:/")) {
                 ext.resDir = ext.resDir.substring(5)
                 LocalLog.log("doPngCompress resDir = ", ext.resDir);
             }
-            if(ext.pngquantToolDir != null && ext.pngquantToolDir.startsWith("file:/")){
+            if (ext.pngquantToolDir != null && ext.pngquantToolDir.startsWith("file:/")) {
                 ext.pngquantToolDir = ext.pngquantToolDir.substring(5)
                 LocalLog.log("doPngCompress pngquantToolDir = ", ext.pngquantToolDir);
 
             }
+            List<String> paths = ImageFileFilter.getInstance().getAllImageFileAbsPath(ext.resDir);
+            PngquantTool tool = new PngquantTool(ext.pngquantToolDir);
+            LocalLog.IS_ON = ext.logEnable;
+            tool.pngCompress(paths);
+            LocalLog.log("doPngCompress","finish");
+        }else{
+            LocalLog.log("doPngCompress","do nothing");
         }
-
-        List<String> paths = ImageFileFilter.getInstance().getAllImageFileAbsPath(ext.resDir);
-        PngquantTool tool = new PngquantTool(ext.pngquantToolDir);
-        LocalLog.IS_ON = ext.logEnable;
-        tool.pngCompress(paths);
     }
 }

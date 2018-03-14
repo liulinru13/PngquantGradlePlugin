@@ -23,12 +23,12 @@ android {
 }
 
 pngCompressExt{
-    enable = true;
+    enable = true
     resDir = uri("./src/main/res")
     pngquantToolDir = uri("../pnglib/")
     logEnable = true
+    doBeforeTaskName = 'preDebugBuild'
 }
-
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

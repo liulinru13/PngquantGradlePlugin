@@ -17,7 +17,8 @@ public class PngquantTool {
 	private final String ORIGIN_TEMP_SUFFIX = "_temp.origin";
 	private final String SUFFIX = ".png";
 	private final String CMD_OS_WIN32 = "cmd /c ";
-
+	private final String PNG_TOOL_NAME_WIN = "pngquanti_win.exe";
+	private final String PNG_TOOL_NAME_MAC = "pngquanti_mac";
 	private final int SUFFIX_LENGTH = 4;
 
 	private final String osName = System.getProperty("os.name");
@@ -42,13 +43,24 @@ public class PngquantTool {
 			return;
 		}
 		LocalLog.log("PngquantTool", "os " + osName);
-
+		File pngTool = null;
 		// windows
 		if (osName != null && osName.contains(WIN_OS)) {
-			cmd(CMD_OS_WIN32,CMD_WIN_STR,fileList);
+			pngTool = new File(toolPath,PNG_TOOL_NAME_WIN);
+			if(pngTool.exists()) {
+				cmd(CMD_OS_WIN32, CMD_WIN_STR, fileList);
+				return;
+			}
 		}
 		else if (osName != null && osName.contains(MAC_OS)) {
-			cmd(null,null,fileList);
+			pngTool = new File(toolPath,PNG_TOOL_NAME_MAC);
+			if(pngTool.exists()) {
+				cmd(null, null, fileList);
+				return;
+			}
+		}
+		if(pngTool != null) {
+			LocalLog.log("PngquantTool error", pngTool.getPath() + " is not exist");
 		}
 	}
 
@@ -127,7 +139,7 @@ public class PngquantTool {
 				String cmd = cmdByOs + toolPath + cmdType + imagePath;
 				pr = rt.exec(cmd);
 			}else if(osName.contains(MAC_OS)) {
-				ProcessBuilder pb = new ProcessBuilder(toolPath + "pngquanti_mac", "--ext", TEMP_SUFFIX, imagePath);
+				ProcessBuilder pb = new ProcessBuilder(toolPath + PNG_TOOL_NAME_MAC, "--ext", TEMP_SUFFIX, imagePath);
 				pr = pb.start();
 			}
 			if(pr != null) {
