@@ -47,7 +47,6 @@ install {
     }
 }
 
-
 //配置上传Bintray相关信息
 bintray {
     user = BINTRAY_USER

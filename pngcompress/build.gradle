@@ -16,10 +16,23 @@ repositories{
 }
 
 group = "com.mmrx.pngcompress"
-version = '1.0.0'
+version = '1.0.1'
 
 dependencies{
     implementation gradleApi()
     implementation localGroovy()
 }
 
+task sourcesJar(type: Jar) {
+    from sourceSets.main.groovy.srcDirs
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
