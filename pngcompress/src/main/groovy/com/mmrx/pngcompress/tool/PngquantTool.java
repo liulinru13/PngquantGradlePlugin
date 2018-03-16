@@ -135,9 +135,11 @@ public class PngquantTool {
 		try {
 			Process pr = null;
 			if(osName.contains(WIN_OS)){
-				Runtime rt = Runtime.getRuntime();
-				String cmd = cmdByOs + toolPath + cmdType + imagePath;
-				pr = rt.exec(cmd);
+//				Runtime rt = Runtime.getRuntime();
+//				String cmd = cmdByOs + toolPath + cmdType + imagePath;
+//				pr = rt.exec(cmd);
+				ProcessBuilder pb = new ProcessBuilder(toolPath + "pngquanti_win", "--ext", TEMP_SUFFIX, imagePath);
+				pr = pb.start();
 			}else if(osName.contains(MAC_OS)) {
 				ProcessBuilder pb = new ProcessBuilder(toolPath + PNG_TOOL_NAME_MAC, "--ext", TEMP_SUFFIX, imagePath);
 				pr = pb.start();

@@ -1,7 +1,7 @@
 apply plugin: 'groovy'
 apply plugin: 'maven'
 // 应用插件
-apply from: '../bintray.gradle'
+//apply from: '../bintray.gradle'
 
 //uploadArchives{
 //    repositories{
@@ -16,11 +16,21 @@ repositories{
 }
 
 group = "com.mmrx.pngcompress"
-version = '1.0.1'
+version = '1.0.0'
 
 dependencies{
     implementation gradleApi()
     implementation localGroovy()
+}
+
+javadoc {
+    options{
+        encoding "UTF-8"
+        charSet 'UTF-8'
+        author true
+        version true
+        links "http://docs.oracle.com/javase/7/docs/api"
+    }
 }
 
 task sourcesJar(type: Jar) {
