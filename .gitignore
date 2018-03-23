@@ -9,3 +9,4 @@
 .externalNativeBuild
 /repos
 gradle.properties
+/pngcompress/build
