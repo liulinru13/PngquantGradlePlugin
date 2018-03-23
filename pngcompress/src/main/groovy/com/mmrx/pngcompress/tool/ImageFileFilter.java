@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * 过滤指定目录下所有的图片文件，将图片文件全部存储于列表中返回
@@ -17,6 +18,9 @@ public class ImageFileFilter {
 	private CustomFilter dirFilter;
 	private SimpleDateFormat dateFormat;
 	private long lastModifiedTime = -1L;
+	
+	private String fileNameRegexStr;//文件名的正则匹配
+	private String filePathRegexStr;//文件路径的正则匹配
 
 	private ImageFileFilter(){
 		dirFilter = new CustomFilter();
@@ -27,11 +31,7 @@ public class ImageFileFilter {
 		return FileFilterHolder.instance;
 	}
 	
-	/**
-	 * 获取参数路径下所有符合要求的png图片的绝对路径列表
-	 * @param rootDirectoryPath
-	 * @return
-	 */
+	//获取参数路径下所有符合要求的png图片的绝对路径列表
 	public List<String> getAllImageFileAbsPath(long lastModifiedTime,String rootDirectoryPath){
 
 		this.lastModifiedTime = lastModifiedTime;
@@ -48,6 +48,13 @@ public class ImageFileFilter {
 		return paths;
 	}
 	
+	public void setFileNameRegexStr(String str){
+		fileNameRegexStr = str;
+	}
+	
+	public void setFilePathRegexStr(String str){
+		filePathRegexStr = str;
+	}
 
 	private void findImageFromDirectory(List<String> imagePaths,File dir){
 		if(imagePaths == null || !dir.exists() ||dir.isFile() 
@@ -118,6 +125,7 @@ public class ImageFileFilter {
 	private class CustomFilter implements FileFilter{
 		private final String SUFFIX_PNG = ".png";
 		private final String SUFFIX_9PNG = ".9.png";
+		
 		private FilterType type = FilterType.PNG;
 		
 		public CustomFilter setFilterType(FilterType type){
@@ -143,6 +151,11 @@ public class ImageFileFilter {
 				if(fileName != null 
 						&& !fileName.endsWith(SUFFIX_9PNG) 
 						&& fileName.endsWith(SUFFIX_PNG)){
+					
+					if(fileNameRegexStr != null){
+						return !regexMatch(fileNameRegexStr,fileName);
+					}
+					
 					return true;
 				}
 			}
@@ -152,11 +165,33 @@ public class ImageFileFilter {
 		private boolean acceptDirectory(File file){
 			if(file != null && file.exists()){
 				if(file.isDirectory()){
+					if(filePathRegexStr != null){
+						return !regexMatch(filePathRegexStr,file.getPath());
+					}
 					return true;
 				}
 			}
 			return false;
 		}
+		
+		/**
+		 * 是否匹配正则表达式
+		 * @param regex
+		 * @param content
+		 * @return
+		 */
+		private boolean regexMatch(final String regex,final String content){
+			//正则表达式匹配
+			try{
+				 boolean match = Pattern.compile(regex).matcher(content).find();
+				return match;
+				}catch(Exception e){
+					e.printStackTrace();
+					//遇到异常，不进行过滤这个文件
+					return true;
+				}
+		}
+		
 		
 	}
 }

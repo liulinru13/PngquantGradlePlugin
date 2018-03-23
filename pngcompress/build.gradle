@@ -1,0 +1,48 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+// 应用插件
+apply from: '../bintray.gradle'
+
+//uploadArchives{
+//    repositories{
+//        mavenDeployer{
+//            repository(url: uri('../repos'))
+//        }
+//    }
+//}
+
+repositories{
+    jcenter()
+}
+
+group = "com.mmrx.pngcompress"
+version = '1.1.0'
+
+dependencies{
+    implementation gradleApi()
+    implementation localGroovy()
+}
+
+javadoc {
+    options{
+        encoding "UTF-8"
+        charSet 'UTF-8'
+        author true
+        version true
+        links "http://docs.oracle.com/javase/7/docs/api"
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.groovy.srcDirs
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}

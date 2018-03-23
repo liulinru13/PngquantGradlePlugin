@@ -1,0 +1,14 @@
+-author 
+-charset 'UTF-8'
+-classpath '/Users/mmrx/Documents/code/gitHub/PngquantGradlePlugin/pngcompress/build/classes/java/main:/Users/mmrx/Documents/code/gitHub/PngquantGradlePlugin/pngcompress/build/classes/groovy/main:/Users/mmrx/Documents/code/gitHub/PngquantGradlePlugin/pngcompress/build/resources/main:/Users/mmrx/.gradle/caches/4.1/generated-gradle-jars/gradle-api-4.1.jar:/Users/mmrx/.gradle/wrapper/dists/gradle-4.1-all/bzyivzo6n839fup2jbap0tjew/gradle-4.1/lib/groovy-all-2.4.11.jar:/Users/mmrx/.gradle/wrapper/dists/gradle-4.1-all/bzyivzo6n839fup2jbap0tjew/gradle-4.1/lib/gradle-installation-beacon-4.1.jar'
+-d '/Users/mmrx/Documents/code/gitHub/PngquantGradlePlugin/pngcompress/build/docs/javadoc'
+-doctitle 'pngcompress 1.1.0 API'
+-encoding 'UTF-8'
+-link 'http://docs.oracle.com/javase/7/docs/api'
+-quiet 
+-version 
+-windowtitle 'pngcompress 1.1.0 API'
+'/Users/mmrx/Documents/code/gitHub/PngquantGradlePlugin/pngcompress/src/main/groovy/com/mmrx/pngcompress/tool/ImageFileFilter.java'
+'/Users/mmrx/Documents/code/gitHub/PngquantGradlePlugin/pngcompress/src/main/groovy/com/mmrx/pngcompress/tool/LocalLog.java'
+'/Users/mmrx/Documents/code/gitHub/PngquantGradlePlugin/pngcompress/src/main/groovy/com/mmrx/pngcompress/tool/PngCompress.java'
+'/Users/mmrx/Documents/code/gitHub/PngquantGradlePlugin/pngcompress/src/main/groovy/com/mmrx/pngcompress/tool/PngquantTool.java'

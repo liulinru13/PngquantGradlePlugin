@@ -22,12 +22,16 @@ android {
 
 }
 
+
 pngCompressExt{
     enable = true
-    resDir = uri("./src/main/res")
+    resDirs = [uri('./src/main/res/'),uri('./src/main/java/')]
     pngquantToolDir = uri("../pnglib/")
     logEnable = true
+    useModifiedTimeFilter = false
     doBeforeTaskName = 'preDebugBuild'
+    filePathRegex = '/*\\-hdpi$'
+    fileNameRegex = '/*_round.png'
 }
 
 dependencies {

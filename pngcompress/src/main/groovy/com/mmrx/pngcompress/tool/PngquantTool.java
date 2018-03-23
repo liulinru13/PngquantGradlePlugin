@@ -27,6 +27,9 @@ public class PngquantTool implements Runnable{
 	private final String toolPath;
 	private final List<String> fileList;
 	private ICompressFinishCallBack compressFinishCallBack;
+	
+	private long startTime = -1L;
+	
 	private PngquantTool() {
 		// TODO Auto-generated constructor stub
 		toolPath = null;
@@ -42,6 +45,10 @@ public class PngquantTool implements Runnable{
 		this.fileList = fileList;
 		this.compressFinishCallBack = compressFinishCallBack;
 	}
+	
+	public void setStartTime(long startTime){
+		this.startTime = startTime;
+	}
 
 	@Override
 	public void run() {
@@ -49,6 +56,11 @@ public class PngquantTool implements Runnable{
 		LocalLog.log("thread " + Thread.currentThread().getId(),"pngCompress finish");
 		if(compressFinishCallBack != null){
 			compressFinishCallBack.onResult(succ);
+		}
+		if(startTime != -1L){
+			long endTime = System.currentTimeMillis();
+			double time = (double)(endTime- startTime)/1000.0;
+			LocalLog.log("thread " + Thread.currentThread().getId(),"pngCompress finish using " + time + " s");
 		}
 	}
 

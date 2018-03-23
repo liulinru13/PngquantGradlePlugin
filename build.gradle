@@ -3,13 +3,13 @@ buildscript {
     repositories {
         google()
         jcenter()
-        maven{
-            url uri('./repos')
-        }
+//        maven{
+//            url uri('./repos')
+//        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
-        classpath 'com.mmrx.pngcompress:pngcompress:1.0.0'
+        classpath 'com.mmrx.pngcompress:pngcompress:1.1.0'
 //        classpath 'com.novoda:bintray-release:0.3.4'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.3.1'
         classpath 'com.github.dcendents:android-maven-plugin:1.2'

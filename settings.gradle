@@ -1,1 +1,2 @@
-include ':app', ':pngcompress'
+include ':app',
+        ':pngcompress'
